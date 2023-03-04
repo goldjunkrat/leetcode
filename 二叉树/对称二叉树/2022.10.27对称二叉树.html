@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣101题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var isSymmetric = function(root) {
+            function compare(leftNode,rightNode){
+                if(leftNode&&rightNode==null){
+                    return false
+                }else if(leftNode==null&&rightNode){
+                    return false
+                }else if(leftNode==null&&rightNode==null){
+                    return true
+                }else if(leftNode.val!==rightNode.val){
+                    return false
+                }else{
+                    let outside = compare(leftNode.left,rightNode.right)
+                    let inside = compare(leftNode.right,rightNode.left)
+                    if(outside==false||inside==false){
+                        return false
+                    }else{
+                        return true
+                    }
+                }
+                
+            }
+            return compare(root.left,root.right)
+        };
+    </script>
+</body>
+</html>

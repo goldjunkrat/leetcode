@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // 我的方案
+    // var romanToInt = function (s) {
+    //     let x = s.split('')
+    //     let sum = 0
+    //     for (let i = 0; i < x.length; i++) {
+    //         if (i == x.length - 1) {
+    //             switch (x[i]) {
+    //                 case 'I':
+    //                     sum += 1
+    //                     break;
+    //                 case 'V':
+    //                     sum += 5
+    //                     break;
+    //                 case 'X':
+    //                     sum += 10
+    //                     break;
+    //                 case 'L':
+    //                     sum += 50
+    //                     break;
+    //                 case 'C':
+    //                     sum += 100
+    //                     break;
+    //                 case 'D':
+    //                     sum += 500
+    //                     break;
+    //                 case 'M':
+    //                     sum += 1000
+    //                     break;
+    //             }
+    //         } else {
+    //             switch (x[i]) {
+    //                 case 'I':
+    //                     if (x[i + 1] == 'V') {
+    //                         sum += 4
+    //                         i += 1
+    //                     } else if (x[i + 1] == 'X') {
+    //                         sum += 9
+    //                         i += 1
+    //                     }
+    //                     else {
+    //                         sum += 1
+    //                     }
+    //                     break;
+    //                 case 'V':
+    //                     sum += 5
+    //                     break;
+    //                 case 'X':
+    //                     if (x[i + 1] == 'L') {
+    //                         sum += 40
+    //                         i += 1
+    //                     } else if (x[i + 1] == 'C') {
+    //                         sum += 90
+    //                         i += 1
+    //                     } else {
+    //                         sum += 10
+    //                     }
+    //                     break;
+    //                 case 'L':
+    //                     sum += 50
+    //                     break;
+    //                 case 'C':
+    //                     if (x[i + 1] == 'D') {
+    //                         sum += 400
+    //                         i += 1
+    //                     } else if (x[i + 1] == 'M') {
+    //                         sum += 900
+    //                         i += 1
+    //                     } else {
+    //                         sum += 100
+    //                     }
+    //                     break;
+    //                 case 'D':
+    //                     sum += 500
+    //                     break;
+    //                 case 'M':
+    //                     sum += 1000
+    //                     break;
+    //             }
+    //         }
+    //     }
+    //     return sum
+    // };
+
+
+    // 更优解
+    var romanToInt = function (s) {
+        const lom = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
+        const num = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+        const len = lom.length;
+        let res = 0;
+        for (let j = 0, sLen = s.length; j < sLen;) {
+            // 此处实际上, 仍然可以进行小优化
+            // 因为罗马字符是从大到小排列，所有找到当前字符串最大的罗马字符后，只需要从当前最大开始往后遍历，而不需要从头再开始
+            for (let i = 0; i < len; i++) {
+                const now = lom[i];
+                const sCur = s.slice(0, now.length);
+                if (now === sCur) {
+                    res += num[i];
+                    j += now.length;
+                    s = s.substring(now.length);
+                    break;
+                }
+            }
+        }
+        return res;
+    };
+    console.log(romanToInt('MCMXCIV'));
+
+
+    // 上述算法思维是匹配到对应的数字,就将此数值加到结果上,并将此部分截去.
+    // 字符串方法:
+    // .substing(5):表示从下标5开始,截取后面的字符串,等价于.substr(5)
+    // .substring(5,10):表示从下标5开始,截取到下标为10,不包含10,等价于.substring(10,5)
+    // .substr(5,4):表示从下标5开始,截取4个字符
+
+</script>
+
+<body>
+
+</body>
+
+</html>

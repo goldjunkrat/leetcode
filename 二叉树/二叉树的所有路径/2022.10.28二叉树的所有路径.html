@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣257题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var binaryTreePaths = function(root) {
+            let result = []
+            if(!root) return result
+            let path = []
+            function findPath(root,path){
+                if(!root) return
+                path.push(root.val)
+                if(!root.left&&!root.right){
+                    let item = path.join('->')
+                    result.push(item)
+                }
+                let leftPath = []
+                let rightPath = []
+                for(let i=0;i<path.length;i++){
+                    leftPath[i] = path[i]
+                    rightPath[i] = path[i]
+                }
+                findPath(root.left,leftPath)
+                findPath(root.right,rightPath)
+            }
+            findPath(root,path)
+            return result
+        };
+    </script>
+</body>
+</html>

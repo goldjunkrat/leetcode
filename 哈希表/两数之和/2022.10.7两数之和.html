@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣1题
+        var twoSum = function(nums, target) {
+            // 遍历,遍历一个数,将一个数存入map中,key为数值,value为这个数的下标.
+            //  因为只有一个答案,所以当target-遍历到的值作为key在map中存在时,即为答案,遍历结束.
+            let map = new Map()
+            let result = []
+            for(let i =0;i<nums.length;i++){
+                let key = target - nums[i]
+                if(map.get(key)!==undefined){
+                    result.push(map.get(key))
+                    result.push(i)
+                    return result
+                }
+                map.set(nums[i],i)
+            }
+            return result
+        };
+        console.log(twoSum([2,7,11,15],9));
+    </script>
+</body>
+</html>

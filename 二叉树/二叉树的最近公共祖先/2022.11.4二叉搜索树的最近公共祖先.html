@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣235题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var lowestCommonAncestor = function(root, p, q) {
+            function traversal(root){
+                if(!root)return null
+                if(root==p||root==q)return root
+                if(root.val>p.val&&root.val>q.val){
+                    return traversal(root.left)
+                }else if(root.val<p.val&&root.val<q.val){
+                    return traversal(root.right)
+                }else{
+                    return root
+                }
+            }
+            return traversal(root)
+        };
+        /* 
+            如果p,q大于当前遍历的节点,那就说明p,q在当前节点的右子树中
+            如果p,q小于当前遍历的节点,那就说明p,q在当前节点的左子树中
+            如果p>当前遍历节点>q,那就说明当前节点是最近公共祖先
+        */
+    </script>
+</body>
+</html>

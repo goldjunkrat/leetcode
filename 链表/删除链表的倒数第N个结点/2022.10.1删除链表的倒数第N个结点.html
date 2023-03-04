@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣19题
+        function ListNode(val,next){
+            this.val = (val===undefined?0:val)
+            this.next = (next===undefined?null:next)
+        }
+
+        var removeNthFromEnd = function(head, n) {
+            // 设置虚拟头结点
+            let dummyHead = new ListNode(0)
+            dummyHead.next = head
+            // 暴力法(统计链表长度)
+            // 统计链表长度
+            // let size = 0
+            // let sizeHead = dummyHead
+            // while(sizeHead.next){
+            //     sizeHead = sizeHead.next
+            //     size++
+            // }
+            // for(let i=0;i<size-n;i++){
+            //     dummyHead = dummyHead.next
+            // }
+            // // cur就是要被删除的结点
+            // let cur = dummyHead.next
+            // if(head==cur){
+            //     head = cur.next
+            // }
+            // dummyHead.next = cur.next
+            // cur.next = null
+            
+            // 快慢指针法
+            let fast = dummyHead
+            let slow = dummyHead
+            // 快指针先移动n步
+            for(let i=0;i<n;i++){
+                fast = fast.next
+            }
+            // 快慢指针同时移动,结束条件为fast.next==null
+            while(fast.next){
+                fast = fast.next
+                slow = slow.next
+            }
+            // 此时的slow就是需要删除的结点的前一个结点
+            let cur = slow.next
+            if(head==cur){
+                head = cur.next
+            }
+            slow.next = cur.next
+            cur.next = null
+
+
+            return head
+
+
+        };
+        /* 
+            快慢指针法:
+                快指针先移动n步,然后快慢指针同步移动,当快指针指向末尾结点(即fast.next==null)时,慢指针就刚好指向需要删除的结点的前一个结点,可以直接进行删除操作
+        */
+    </script>
+</body>
+</html>

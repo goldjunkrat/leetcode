@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣20题
+        var isValid = function(s) {
+            let arrS = Array.from(s)
+            // 定义一个栈
+            let stack = []
+            for(let i=0;i<arrS.length;i++){
+                if(arrS[i]=='('||arrS[i]=='['||arrS[i]=='{'){
+                    stack.push(arrS[i])
+                }else{
+                    // 右括号多余的情况
+                    if(stack.length==0){
+                        return false
+                    }
+                    // 左右括号不匹配的情况
+                    if(stack[stack.length-1]=='('&&arrS[i]!=')'){
+                        return false
+                    }
+                    if(stack[stack.length-1]=='['&&arrS[i]!=']'){
+                        return false
+                    }
+                    if(stack[stack.length-1]=='{'&&arrS[i]!='}'){
+                        return false
+                    }
+                    stack.pop()
+                }
+            }
+            // 左括号多余的情况
+            if(stack.length!==0){
+                return false
+            }
+            return true
+        };
+    </script>
+</body>
+</html>

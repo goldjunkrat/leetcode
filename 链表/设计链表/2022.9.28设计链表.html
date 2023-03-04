@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣707题
+
+        function ListNode (val,next){
+            this.val = (val==undefined?0:val)
+            this.next = (next==undefined?null:next)
+        }
+
+        var MyLinkedList = function() {
+            this.size = 0
+            // 虚拟头结点
+            this.head = new ListNode(0)
+        };
+
+        MyLinkedList.prototype.get = function(index) {
+            if(index<0||index>=this.size){
+                return -1
+            }
+            let cur = this.head
+            for(let i=0;i<=index;i++){
+                cur = cur.next
+                
+            }
+            return cur.val
+        };
+
+
+        MyLinkedList.prototype.addAtIndex = function(index, val) {
+            // 在头部插入结点的情况
+            if(index<=0){
+                let newNode = new ListNode(val)
+                newNode.next = this.head.next
+                this.head.next = newNode
+                this.size++
+                return
+            }
+            // 在尾部插入结点的情况
+            if(index==this.size){
+                let cur = this.head
+                // 遍历寻找尾部的结点
+                for(let i=0;i<this.size;i++){
+                    cur = cur.next
+                }
+                let newNode = new ListNode(val)
+                cur.next = newNode
+                this.size++
+                return 
+            }
+            // index大于链表长度,不会插入
+            if(index>this.size){
+                return -1
+            }
+            // 一般情况
+            // 寻找index-1的结点
+            let pred = this.head
+            for(let i=0;i<=index-1;i++){
+                pred = pred.next
+            }
+            let addNode = new ListNode(val)
+            addNode.next = pred.next
+            pred.next = addNode
+            this.size++
+            return
+
+        };
+
+        MyLinkedList.prototype.addAtHead = function(val) {
+            this.addAtIndex(0,val)
+        };
+
+        MyLinkedList.prototype.addAtTail = function(val) {
+            this.addAtIndex(this.size,val)
+        };
+
+        MyLinkedList.prototype.deleteAtIndex = function(index) {
+            if(index<0||index>=this.size){
+                return
+            }
+            // 找到链表的第index-1个结点
+            let cur = this.head
+            for(let i=0;i<=index-1;i++){
+                cur = cur.next
+            }
+            // 指向被删除的结点的指针
+            let deleteOne = cur.next
+            cur.next = cur.next.next
+            deleteOne.next = null
+            this.size--
+            return
+        };
+
+        let linkList = new MyLinkedList()
+        linkList.addAtIndex(0)
+    </script>
+</body>
+</html>

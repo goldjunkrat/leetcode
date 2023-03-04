@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣剑指Offer 05题
+        var replaceSpace = function(s) {
+            // 使用方法的情况
+            // let arr = s.split(' ')
+            // arr = arr.join('%20')
+            // return arr
+
+            // 双指针
+            // 统计字符串中空格的数量
+            let blankNum = 0
+            let arrS = Array.from(s)
+            for(let i=0;i<arrS.length;i++){
+                if(arrS[i]==' '){
+                    blankNum++
+                }
+            }
+
+            // 左指针指向源字符串数组末尾
+            let l = arrS.length-1
+            // 右指针指向加上多的2*blankNum个之后的数组末尾
+            let r = arrS.length-1+2*blankNum
+
+            while(l>=0){
+                if(arrS[l]==' '){
+                    arrS[r]='0'
+                    arrS[r-1]='2'
+                    arrS[r-2]='%'
+                    r-=3
+                }else{
+                    arrS[r] = arrS[l]
+                    r--
+                }
+                l--
+            }
+            return arrS.join('')
+        };
+        console.log(replaceSpace("We are happy."));
+
+        /* 
+            双指针法:
+                1.将源字符串数组扩充为加上替换字符串之后的长度
+                2.左指针指向源字符串的末尾,右指针指向扩充之后的字符串的末尾
+                3.左指针--,如果左指针指向的值为' ',则右指针从现在所指的字符开始,向前依次写入'0','2','%'
+                    如果左指针指向的指不为空格,则将左指针指向的值赋予右指针
+        
+        */
+    </script>
+</body>
+</html>

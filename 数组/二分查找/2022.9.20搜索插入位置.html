@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣35题
+        var searchInsert = function (nums, target) {
+            let n = nums.length
+            let left = 0
+            let right = n-1
+            while(left<=right){
+                let mid = (right-left)/2 + left
+                mid = Math.floor(mid)
+                
+                
+
+                //考虑的是左右指向同一个数的情况比如[1,3],2
+                // if(left==right&&nums[mid]!==target){
+                //     if(target<nums[left]){
+                //         if(left==0){
+                //             return 0
+                //         }
+                //         return left
+                //     }
+                //     if(target>nums[right]){
+                //         return right+1
+                //     }
+                // }
+
+
+                // 考虑的是目标不在二分查找的区间内
+                if(target<nums[left]){
+                    return left
+                }
+                if(target>nums[right]){
+                    return right+1
+                }
+
+                if(target<nums[mid]){
+                    
+                    right = mid-1
+                    // if(mid==0){
+                    //     right = 0
+                    // }
+                }else if(target>nums[mid]){
+                    left = mid+1
+                }else{
+                    return mid
+                }
+
+                
+            }
+                     
+        };
+
+        console.log(searchInsert([3,5,7,9,10],8));
+    </script>
+</body>
+
+</html>

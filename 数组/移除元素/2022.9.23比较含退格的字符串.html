@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣844题
+        var backspaceCompare = function(s, t) {
+            let first = s.split('')
+            let second = t.split('')
+            let slow = 0
+            for(let fast = 0;fast<first.length;fast++){
+                if(first[fast]!=='#'){
+                    first[slow]=first[fast]
+                    slow+=1
+                }else{
+                    slow-=1
+                    if(slow<0){
+                        slow = 0
+                    }
+                    first[slow]=0
+                    
+                }
+            }
+            let man = 0
+            for(let fast = 0;fast<second.length;fast++){
+                if(second[fast]!=='#'){
+                    second[man]=second[fast]
+                    man+=1
+                }else{
+                    man-=1
+                    if(man<0){
+                        man = 0
+                    }
+                    second[man]=0
+                    
+                }
+            }
+            if(slow!==man){
+                return false
+            }else{
+                let flag = 0
+                for(let i=0;i<man;i++){
+                    if(first[i]!==second[i]){
+                        flag=1
+                    }
+                }
+                if(flag==1){
+                    return false
+                }
+            }
+            return true
+            // console.log(first,second);
+        };
+        
+        console.log(backspaceCompare('ab##','c#d#'));
+    </script>
+</body>
+</html>

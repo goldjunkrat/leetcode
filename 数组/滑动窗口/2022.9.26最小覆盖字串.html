@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣76题
+        var minWindow = function(s, t) {
+            // 用一个字符串存储滑动窗口内实时的各字符出现的次数
+            let window = {}
+            // 可以用一个对象去存储t中各字符出现的次数
+            let need = {}
+            // 将所给字符串分割为字符数组
+            let target = t.split('')
+            // 为need中填充内容
+            for(let i=0;i<target.length;i++){
+                need[target[i]] = (need[target[i]]||0) + 1
+            }
+            // 目标字符串的字符种类数
+            let strNum = Object.getOwnPropertyNames(need).length
+            
+
+            // 将s变为数组
+            let nums = s.split('')
+            
+
+            // 滑动窗口能完全覆盖的字符种类数
+            let valid = 0
+            // 最小覆盖子串长度
+            let len = nums.length
+            // 最小覆盖子串的起始索引
+            let start = -1
+            // 设置滑动窗口
+            let l = 0
+            for(let r=0;r<nums.length;r++){
+                window[nums[r]] = (window[nums[r]]||0) + 1
+                if(window[nums[r]]==need[nums[r]]){
+                    valid+=1
+                }
+                // 如果窗口覆盖的字符种类数=目标字符串的字符种类数,那么就进行左指针右移
+                
+                while(valid==strNum){
+                    
+                    // 判断是否是最小长度
+                    if(len>=r-l+1){
+                        // 如果此时是最小长度,那么起始索引就是此时的左指针位置
+                        start = l
+                        
+                        len = r-l+1
+                        
+                    }
+                    // 窗口对象中,刚刚移出的字符的数量-1
+                    window[nums[l]] -= 1
+                    // 此时再判断1.目标对象中是否有此字符种类,如果没有,则没事2.如果目标对象中有此字符种类,判断此字符的数量是否大于等于目标字符串中,如果小于,则valid-1
+                    if(need[nums[l]]&&window[nums[l]]<need[nums[l]]){
+                        valid-=1
+                    }
+                    // 左指针右移
+                    l++
+                }
+            }
+
+            // s不能覆盖t的情况
+            if(start==-1){
+                return ''
+            }
+
+            // 设置结果字符串
+            
+            let result = nums[start]
+            for(let i=1;i<len;i++){
+                result = result+nums[start+i]
+            }
+            return result
+            
+
+
+            
+        };
+        
+        console.log(minWindow('abccd','bcd'));
+
+
+        // 处理判断一个字符串的各个字符是否在另一个字符串中:
+        // 可以使用一个对象以键值对的形式,统计这个字符串中每个字符出现的次数
+        // 使用另一个对象统计另一个字符串中每个字符出现的次数
+        // strNum = Object.getOwnPropertyNames(need).length算出一个字符串中有几种字符出现
+        // 如果都满足出现次数,且满足的个数valid==strNum,则说明这个字符串的各个字符是在另一个字符串中的
+    </script>
+</body>
+</html>

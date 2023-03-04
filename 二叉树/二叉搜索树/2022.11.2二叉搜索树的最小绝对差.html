@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣530题
+        function TreeNode(val, left, right) {
+            this.val = (val == undefined ? 0 : val)
+            this.left = (left == undefined ? null : left)
+            this.right = (right == undefined ? null : right)
+        }
+
+        var getMinimumDifference = function(root) {
+            // 遍历为数组法
+            // let result = []
+            // function traversal(root){
+            //     if(!root)return
+            //     traversal(root.left)
+            //     result.push(root.val)
+            //     traversal(root.right)
+            // }
+            // traversal(root)
+            // let min = Math.max(...result)
+            // for(let i=0;i<result.length-1;i++){
+            //     for(let j=i+1;j<result.length;j++){
+            //         let value = result[i]-result[j]
+            //         if(value<0){
+            //             value = 0-value
+            //         }
+            //         if(value<min){
+            //             min = value
+            //         }
+            //     }
+            // }
+            // return min
+
+            // 双指针法
+            let result = 10^5
+            let pre = null
+            function traversal(cur){
+                if(!cur) return
+                traversal(cur.left)
+                if(pre){
+                    result = ((cur.val-pre.val)<result)?(cur.val-pre.val):result
+                }
+                pre = cur
+                traversal(cur.right)
+            }
+            traversal(root)
+            return result
+        };
+
+        /* 
+            双指针法:
+                1.二叉搜索树的特性是:按中序遍历,遍历的数值是单调递增的,所以最小的差值肯定出现在相邻元素之间.
+                2.按中序遍历,每个节点都设为pre,而这个节点的上一个节点为cur,比较两个节点的差值即可.
+                3.更新顺序:中序遍历,pre的值一定比cur的值小,遍历到一个节点,直接让pre指向它即可
+        
+        */
+    </script>
+</body>
+</html>

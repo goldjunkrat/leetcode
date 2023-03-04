@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣59题
+        var generateMatrix = function(n) {
+            let nums=[]
+            for(let k=0;k<n;k++){
+                nums[k]=[]
+            }
+            
+            let count=1
+            // 设置起始点
+            let startX = 0
+            let startY = 0
+            // 设置每圈遍历时长度需要减去的offset
+            let offset = 1
+            // 需要循环的圈数
+            let circle = Math.floor(n/2) 
+            // 当前的元素的坐标,i表示行,j表示列
+            let i=0
+            let j=0
+            while(circle!==0){
+                // 上边
+                for(i=startX,j=startY;j<n-offset;j++){
+                    nums[i][j]=count
+                    
+                    count++
+                }
+                // 右边
+                for(;i<n-offset;i++){
+                    nums[i][j]=count
+                    count++
+                }
+                // 下面
+                for(;j>startY;j--){
+                    // console.log(j);
+                    nums[i][j]=count
+
+                    count++
+                }
+                // console.log(j);
+                // 左面
+                for(;i>startX;i--){
+                    nums[i][j]=count
+                    count++
+                }
+                
+                // 走完一圈后,调整起始位置
+                startX++
+                startY++
+                offset++
+                circle--
+            }
+            // 如果n是奇数,那么最后一个点就是正中心
+            if(n%2!==0){
+                nums[startX][startY]=count
+                
+            }
+            return nums
+        };
+        
+        // generateMatrix(3)
+        console.log(generateMatrix(3));
+
+        // 整个转圈的过程遵从区间左闭右开的原则
+    </script>
+</body>
+</html>

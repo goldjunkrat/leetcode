@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣15题
+        // 哈希表
+        var threeSum = function(nums) {
+            let array = nums.sort((a,b)=>b-a)
+            let n = nums.length
+            let left = 1
+            let right = n-1
+            let con = 0
+            let result = []
+            for(con=0;con<n;con++){
+                if(array[con]>0){
+                    break
+                }
+                
+                let sum = array[con]+array[left]+array[right]
+                if(sum<0){
+                    left+=1
+                    continue
+                }
+            }
+        };
+    </script>
+</body>
+</html>

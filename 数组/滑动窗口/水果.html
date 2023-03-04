@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var totalFruit = function(fruits) {
+            let n = fruits.length
+            let len = 0
+            let start = 0
+            let kind = [fruits[0]]
+            let l = 0
+            for(let r=0;r<n;r++){
+                if(!kind.includes(fruits[r])){
+                    
+                    if(kind.length==1){
+                        kind[1] = fruits[r]
+                    }else{
+                        l = start
+                        kind[0] = fruits[r-1]
+                        kind[1] = fruits[r]
+                    }
+                }
+                if(fruits[r]!==fruits[start]){
+                    start = r
+                }
+                len = Math.max(len,r-l+1)
+
+            }
+            return len
+        }
+    </script>
+</body>
+</html>

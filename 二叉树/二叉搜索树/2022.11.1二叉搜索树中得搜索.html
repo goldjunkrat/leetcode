@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣700题
+        function TreeNode(val, left, right) {
+            this.val = (val == undefined ? 0 : val)
+            this.left = (left == undefined ? null : left)
+            this.right = (right == undefined ? null : right)
+        }
+
+        var searchBST = function (root, val) {
+            let newRoot = null
+            function search(root, val) {
+                if (!root) return null
+                if (root.val == val) {
+                    newRoot = new TreeNode(root.val)
+                    newRoot.left = search(root.left, val)
+                    newRoot.right = search(root.right, val)
+                }
+                root.left=search(root.left,val)
+                root.right=search(root.right,val)
+                return root
+            }
+            search(root,val)
+            return newRoot
+
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    /* 
+        js字符串方法:
+            .split():将字符串以()中的值为界进行分割,分割为数组
+        js数组方法:
+            .reverse():将数组的顺序反转
+            .join():将数组的每个元素以()中的参数连接
+        JSON.stringify():
+            将()内的参数转换为字符串
+    */
+    var isPalindrome = function(x) {
+        if(x<0){
+            return false
+        }else if(x==0){
+            return true
+        }else{
+            let x1 = JSON.stringify(x)
+            console.log(x1.split('').reverse().join(''));
+            console.log(x1.split('').join(''));
+            console.log(x1.split('').toString()===x1.split('').reverse().toString());
+            if(x1.split('').toString()===x1.split('').reverse().toString()){
+                return true
+            }else{
+                return false
+            }
+        }
+};
+
+console.log(isPalindrome(20)); 
+</script>
+<body>
+    
+</body>
+</html>

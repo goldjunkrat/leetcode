@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣27题
+        var removeElement = function(nums, val) {
+            let n = nums.length
+            let fast = 0
+            let slow = 0
+            for(fast=0;fast<n;fast++){
+                if(nums[fast]!==val){
+                    nums[slow] = nums[fast]
+                    slow++
+                }
+            }
+            return slow
+        };
+
+        // 双指针
+        /* 
+            快指针负责遍历数组的每个元素,看这个元素是否和目标元素相同
+            慢指针负责将不是目标元素的元素覆写至原位置(相当于做数组元素前移的操作)
+        */
+    </script>
+</body>
+</html>

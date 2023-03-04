@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣226题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var invertTree = function(root) {
+            // let result = root
+            // function reverse(init){
+            //    if(init){
+            //     reverse(init.left)
+            //     reverse(init.right)
+            //     let temp = init.right
+            //     init.right = init.left
+            //     init.left = temp
+            //    }else{
+            //     return
+            //    }
+            // }
+            // reverse(result)
+            // return result
+            if(root){
+                invertTree(root.left)
+                invertTree(root.right)
+                let temp = root.right
+                root.right = root.left
+                root.left = temp
+                return root
+            }else{
+                return null
+            }
+        };
+    </script>
+</body>
+</html>

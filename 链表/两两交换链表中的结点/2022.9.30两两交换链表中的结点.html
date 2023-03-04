@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣24题
+        function ListNode(val,next){
+            this.val = (val==undefined?0:val)
+            this.next = (next==undefined?null:next)
+        }
+
+        var swapPairs = function(head) {
+            if(head==null||head.next==null){
+                return head
+            }
+            let dummyHead = new ListNode(0)
+            dummyHead.next = head
+            let cur = head
+            let temp = head.next
+            head = temp
+            while(temp){
+                dummyHead.next = temp
+                cur.next = temp.next
+                temp.next = cur
+                dummyHead = cur
+                cur = dummyHead.next
+                if(cur==null){
+                    break
+                }
+                temp = cur.next
+            }
+            return head
+
+        };
+
+        // 在链表的操作中,经常设定虚拟头结点来帮助完成操作
+    </script>
+</body>
+</html>

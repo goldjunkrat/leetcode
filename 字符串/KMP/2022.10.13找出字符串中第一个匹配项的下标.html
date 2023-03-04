@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣28题
+        var strStr = function(haystack, needle) {
+            let arrN = Array.from(needle)
+            // 创建next数组
+            let next = []
+            next[0] = 0
+            // 前缀末尾指针
+            let pre = 0
+            // 后缀末尾指针
+            let last = 1
+            for(;last<arrN.length;last++){
+                
+                    while(pre>0&&arrN[pre]!=arrN[last]){
+                        pre = next[pre-1]
+                    }
+                if(arrN[pre]==arrN[last]){
+                    pre++
+                    // next[last] = pre
+                    // continue
+                }
+                
+                // 如果前后缀末尾指针指向的值相同,则前缀末尾指针前进一位,此时前缀末尾指针的索引值即为此时 以last为末尾的needle子串的最大等长前后缀长度
+                // if(arrN[pre]==arrN[last]){
+                //     pre++
+                //     next[last] = pre
+                //     continue
+                // }
+                // 如果前后缀末尾指针指向的值不同,则前缀末尾指针回退,回退直到两个指针的值相同,或指向0
+                
+                next[last] = pre
+            }
+            console.log(next);
+            // 设置第一个匹配项的下标
+            let result = -1
+            let arrH = Array.from(haystack)
+            // 设置指向模式串的指针
+            let j=0
+            for(let i=0;i<arrH.length;i++){                
+                    while(j>0&&arrH[i]!==arrN[j]){
+                        j = next[j-1]
+                        console.log(j);
+                        console.log(arrN[j]);
+                    }
+                    if(arrH[i]==arrN[j]){
+                        j++
+                    }
+                
+                
+                // if(j==0&&arrH[i]!==arrN[j]){
+                //     j++
+                // }
+                
+                // 如果指向模式串的指针指向了模式串的最后,则说明找到了匹配的字符串
+                // 则起始索引就是当前文本串指针i的位置减去模式串的长度
+                
+                if(j==arrN.length){
+                    console.log(i);
+                    result = i - arrN.length+1
+                    break
+                }
+            }
+            return result
+
+
+            
+        };
+        console.log(strStr("adcadcaddcadde","adcadde")); 
+    </script>
+</body>
+</html>

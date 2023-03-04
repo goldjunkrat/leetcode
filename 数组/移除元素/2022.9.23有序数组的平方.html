@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣977题
+        var sortedSquares = function(nums) {
+            
+            // 直接使用sort排序
+            // let n = nums.length
+            // for(let i=0;i<n;i++){
+            //     nums[i] = nums[i]*nums[i]
+            // }
+            // nums.sort((a,b)=>a-b)
+            // return nums
+
+            // 使用双指针
+            let n = nums.length
+            let start = 0
+            let end = n-1
+            let nums2 = []
+            for(let i=n-1;i>=0;i--){
+                
+                if((nums[end]*nums[end])<(nums[start]*nums[start])){
+                    nums2[i] = nums[start]*nums[start]
+                    
+                    start+=1
+                }else{
+                    nums2[i] = nums[end]*nums[end]
+                    
+                    end-=1
+                }
+            }
+            return nums2
+        };
+        console.log(sortedSquares([-4,-1,0,3,10]));
+
+
+
+        // 使用双指针
+        /* 
+            
+        */
+    </script>
+</body>
+</html>

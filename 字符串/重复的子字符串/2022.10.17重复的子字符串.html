@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣459题
+        var repeatedSubstringPattern = function(s) {
+            // 暴力解法
+            // let arrS = Array.from(s)
+            // for(let i =0;i<arrS.length-1;i++){
+            //     let flag = true
+                
+            //     // end表示匹配的下标的结尾
+            //     let end = i+1
+            //     // start表示匹配的下标的开始
+            //     let start = 0
+            //     // 子字符串
+
+            //     let sub = s.substring(start,end)
+                
+            //     while(start<arrS.length){
+            //         if(s.substring(start,end)!=sub){
+            //             flag = false
+            //             break
+            //         }
+            //         end+=i+1
+            //         start+=i+1
+            //     }
+            //     if(flag){
+            //         return flag
+            //     }
+
+            // }
+            // return false
+
+            // kmp解法
+            // 求next数组
+            let next = []
+            let arrS = Array.from(s)
+            next[0] = 0
+            let j = 1
+            for(let i=0;j<arrS.length;j++){
+                while(i>0&&arrS[i]!=arrS[j]){
+                    i = next[i-1]
+                }
+                if(arrS[i]==arrS[j]){
+                    i++
+                }
+                next[j] = i
+            }
+            let max = 0
+            for(let i=0;i<next.length;i++){
+                if(next[i]>=max){
+                    max = next[i]
+                }
+            }
+            if(max==0){
+                return false
+            }
+            if(max!==next[next.length-1]){
+                return false
+            }
+            if(next.length%(next.length-max)!==0){
+                return false
+            }
+            // if(next.length==1){
+            //     return false
+            // }
+            return true
+            
+
+            // 如果next数组的最大值不是最后一位,那就说明这个字符串必不重复,如ababc
+            // 如果next数组的长度%(长度-最大相等前后缀长度)!==0,说明这个字符串不重复,如aba
+            // 使用next数组判断的原理是:最大相等前缀与源字符串重复的部分=最大相等后缀与源字符串重复的部分=最大相等前缀=最大相等后缀
+        };
+        console.log(repeatedSubstringPattern('ababab'));
+    </script>
+</body>
+</html>

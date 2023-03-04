@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣216题
+        var combinationSum3 = function(k, n) {
+            let path = []
+            let result = []
+            function backTracking(startIndex,k,n){
+                let sum = 0
+                for(let i =0;i<path.length;i++){
+                    sum+=path[i]
+                }
+                if(sum>n)return
+                if((sum==n)&&(path.length==k)){
+                    
+                    result.push(path.slice())
+                    return
+                }
+                if(path.length==k){
+                    return
+                }
+                for(let i =startIndex;i<=(9-(k-path.length)+1);i++){
+                    path.push(i)
+                    backTracking(i+1,k,n)
+                    path.pop()
+                }
+            }
+            backTracking(1,k,n)
+            return result
+        };
+        console.log(combinationSum3(3,7));
+    </script>
+</body>
+</html>

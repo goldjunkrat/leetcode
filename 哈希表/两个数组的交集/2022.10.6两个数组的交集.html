@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣349题
+        // 使用set
+        var intersection = function(nums1, nums2) {
+            let set1 = new Set(nums1)
+            let set2 = new Set(nums2)
+            let map = new Map()
+            let result = []
+            set1.forEach((num)=>{
+                value =  map.get(num)||0
+                value+= 1
+                map.set(num,value)
+            })
+            set2.forEach((num)=>{
+                if(map.get(num)){
+                    result.push(num)
+                }
+            })
+            return result
+        };
+        intersection([1,2,2,1],[2,2])
+        console.log(intersection([1,2,2,1],[2,2]));
+
+    </script>
+</body>
+</html>

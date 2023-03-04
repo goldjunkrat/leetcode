@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣513题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var findBottomLeftValue = function(root) {
+            let result = [] 
+            let queue = []
+            queue.push(root)
+            while(queue.length){
+                let size = queue.length
+                let rest = size
+                let floor = []
+                while(rest>0){
+                    let out = queue.shift()
+                    floor.push(out.val)
+                    rest--
+                    out.left&&queue.push(out.left)
+                    out.right&&queue.push(out.right)
+                }
+                result.push(floor)
+            }
+            return result[result.length-1][0]
+        };
+    </script>
+</body>
+</html>

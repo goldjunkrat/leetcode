@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣225题
+        var MyStack = function () {
+            // 接收数据的队列,队列首为刚刚进入队列的元素
+            this.queue = []
+            // 此队列模仿为模仿的栈
+            this.stack = []
+        };
+
+        /** 
+         * @param {number} x
+         * @return {void}
+         */
+        MyStack.prototype.push = function (x) {
+            // 向队列中添加数据
+            this.queue.push(x)
+            // 记录队列的长度
+            let length = this.queue.length
+            // 如果模仿栈的长度不为0,则将模仿栈的所有元素出模仿栈(执行出队列操作)并进入队列
+            while(this.stack.length!=0){
+                let outValue = this.stack.shift()
+                this.queue.push(outValue)
+            }
+            // 向模仿栈中添加数据
+            this.stack.push(x)
+            // 将队列中的直到新添加的数据之前的数据出队列并逐一添加至模仿栈中
+            for(let i=0;i<length-1;i++){
+                this.stack.push(this.queue.shift())
+            }
+        };
+
+        /**
+         * @return {number}
+         */
+        MyStack.prototype.pop = function () {
+            this.queue.shift()
+            return this.stack.shift()
+        };
+
+        /**
+         * @return {number}
+         */
+        MyStack.prototype.top = function () {
+            return this.stack[0]
+        };
+
+        /**
+         * @return {boolean}
+         */
+        MyStack.prototype.empty = function () {
+            return this.stack.length===0
+        };
+
+
+        // 每次添加时更新的过程
+        /* 
+            1.向队列2添加新数据x
+            2.将队列1的所有数据依次出队列并添加至队列2
+            3.将队列2直到新添加的元素x之前的元素出队列并添加到队列1
+            4.此时的两个队列都是栈的结构了
+        */
+    </script>
+</body>
+
+</html>

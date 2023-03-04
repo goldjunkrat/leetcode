@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣116题
+        function Node(val,left,right,next){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+            this.next = (next==undefined?null:next)
+        }
+
+        var connect = function(root) {
+            let result = root
+            let queue = []
+            if(!root) return result
+            queue.push(root)
+            while(queue.length){
+                let size = queue.length
+                let rest = size
+                
+                while(rest>0){
+                    let out = queue.shift()
+                    
+                    rest--
+                    if(rest){
+                        out.next = queue[0]
+                    }else{
+                        out.next = null
+                    
+                    }
+                    out.left&&queue.push(out.left)
+                    out.right&&queue.push(out.right)
+                }
+            }
+            return result
+        };
+    </script>
+</body>
+</html>

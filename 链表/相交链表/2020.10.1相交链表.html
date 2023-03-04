@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣160题
+        function ListNode(val,next){
+            this.val = (val==undefined?0:val)
+            this.next = (next==undefined?null:next)
+        }
+        var getIntersectionNode = function(headA, headB) {
+            // 求出A链的长度
+            let sizeA = 0
+            // 求出B链的长度
+            let sizeB = 0
+            
+            let dummyHeadA = new ListNode(0)
+            dummyHeadA.next = headA
+            let curA = dummyHeadA
+            while(curA.next){
+                curA = curA.next
+                sizeA++
+            }
+            let dummyHeadB = new ListNode(0)
+            dummyHeadB.next = headB
+            let curB = dummyHeadB
+            while(curB.next){
+                curB = curB.next
+                sizeB++
+            }
+            // 设置两个链表长度的差值
+            let offset = 0
+            if(sizeA>sizeB){
+                offset = sizeA-sizeB
+                for(let i =0;i<=offset;i++){
+                    dummyHeadA = dummyHeadA.next
+                }
+                dummyHeadB = dummyHeadB.next
+                while(dummyHeadA.next!==dummyHeadB.next&&dummyHeadA.next!==null&&dummyHeadB.next!==null){
+                    dummyHeadA = dummyHeadA.next
+                    dummyHeadB = dummyHeadB.next
+                }
+                if(dummyHeadA==dummyHeadB){
+                    return dummyHeadA
+                }
+                return dummyHeadA.next
+            }else{
+                offset = sizeB-sizeA
+                for(let i =0;i<=offset;i++){
+                    dummyHeadB = dummyHeadB.next
+                }
+                dummyHeadA = dummyHeadA.next
+                while(dummyHeadA.next!==dummyHeadB.next&&dummyHeadA.next!==null&&dummyHeadB.next!==null){
+                    dummyHeadA = dummyHeadA.next
+                    dummyHeadB = dummyHeadB.next
+                }
+                if(dummyHeadA==dummyHeadB){
+                    return dummyHeadA
+                }
+                return dummyHeadA.next
+            }
+
+        };
+        // 算出两个链表的长度,将长的那条移动两条链表相差的长度,使他们从同一起跑线开始
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var longestCommonPrefix = function (strs) {
+            let result = ''
+            let flag = 0
+            strs.forEach(str => {
+                if (str === '') {
+                    return ''
+                }
+            });
+            for (let i = 0; ; i++) {
+                let commonWord = strs[0].split('')[i]
+                strs.forEach(str => {
+                    if (!str.split('')[i] || str.split('')[i] !== commonWord) {
+                        flag = 1
+                        return
+                    }
+                })
+                if (flag === 1) {
+                    break
+                }
+                result += commonWord
+            }
+            return result
+        };
+        let array = ["dog", "racecar", "car"]
+        console.log(longestCommonPrefix(array));
+
+
+        // js中不存在数据,如数组只有3个元素,但是取了数组[3],则这个值为undefined
+        // 效率更高的方法
+        var longestCommonPrefix = function (strs) {
+            var re = '';
+            if (!strs.length) return re;
+            for (var j = 0; j < strs[0].length; j++) {//第j位
+                for (var i = 1; i < strs.length; i++) {//第i个
+                    if (strs[i][j] != strs[0][j]) return re
+                }
+                re += strs[0][j];
+            }
+            return re;
+        };
+
+
+    </script>
+</body>
+
+</html>

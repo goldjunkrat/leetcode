@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣第四题
+        var findMedianSortedArrays = function (nums1, nums2) {
+            arrayB = nums1.concat(nums2)
+            let arrayC = arrayB.sort(function(a,b){return a-b})
+            if (arrayC.length % 2 == 0) {
+                return (arrayC[arrayC.length / 2 - 1] + arrayC[arrayC.length / 2]) / 2
+            } else {
+                return arrayC[(arrayC.length+1)/2-1]
+            }
+        };
+        let a = findMedianSortedArrays([2,40],[5])
+        console.log(a);
+
+
+        // var array1 = [-2, -1]
+        // var array2 = [3]
+        // 合并两个数组使用concat
+        // var array9 = array1.concat(array2)
+
+        // 合并两个数组使用扩展运算符...
+        // var array10 = [...array1,...array2]
+        
+        //使用array1.push(...array2)将array2合并至array1的末尾中
+
+
+        // js数组的排序方法sort()
+        // sort()默认排序顺序为字母升序
+        // 数字和字符串之间的1没有顺序优先级,只会按照数组中的先后顺序排列
+        // sort()有一个可选参数,且是回调函数,回调函数的参数有两个,第2个参数肯定在第一个之前
+        // 带有回调函数作为参数的sort()的排序是看回调函数的返回值
+        // 如果返回值大于0,则位置互换
+        // 如果返回值小于0,则位置不变
+        // sort会改变原数组
+
+    </script>
+</body>
+
+</html>

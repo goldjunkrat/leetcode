@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣429题
+        function TreeNode(val,children){
+            this.val = val
+            this.children = children
+        }
+
+        var levelOrder = function(root) {
+            let result = []
+            let queue = []
+            if(!root) return result
+            queue.push(root)
+            while(queue.length){
+                let size = queue.length
+                let rest = size
+                let floor = []
+                while(rest>0){
+                    let out = queue.shift()
+                    floor.push(out.val)
+                    rest--
+                    // for(let item of out.children){
+                    //     item&&queue.push(item)
+                    // }
+                    out.children.forEach(item=>{
+                        item&&queue.push(item)
+                    })
+                }
+                result.push(floor)
+            }
+            return result
+        };
+    </script>
+</body>
+</html>

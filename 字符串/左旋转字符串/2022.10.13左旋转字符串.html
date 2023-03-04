@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣剑指offer 58-Ⅱ题
+        var reverseLeftWords = function(s, n) {
+            // 申请额外空间的情况
+            // let right = s.length
+            // let arr = Array.from(s)
+            // for(let i=0;i<n;i++){
+            //     arr[right] = arr[i]
+            //     right++
+            // }
+            // let str = ''
+            // for(let i=n;i<arr.length;i++){
+            //     str+=arr[i]
+            // }
+            // return str
+
+            // 先反转前n个字符串,再反转剩下的字符串,最后反转整个字符串
+            let arr = Array.from(s)
+            for(let i=0;i<Math.floor(n/2);i++){
+                let j = n-1-i
+                let temp = arr[j]
+                arr[j] = arr[i]
+                arr[i] = temp
+            }
+
+            for(let i=n;i<n+Math.floor((arr.length-n)/2);i++){
+                let j = n+arr.length-i-1
+                let temp = arr[j]
+                arr[j] = arr[i]
+                arr[i] = temp
+            }
+            for(let i=0;i<Math.floor(arr.length/2);i++){
+                let j = arr.length-1-i
+                let temp = arr[j]
+                arr[j] = arr[i]
+                arr[i] = temp
+            }
+            return arr.join('')
+        };
+        console.log(reverseLeftWords('lrloseumgh',6));
+    </script>
+</body>
+</html>

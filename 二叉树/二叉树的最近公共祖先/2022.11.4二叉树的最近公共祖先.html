@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣236题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var lowestCommonAncestor = function(root, p, q) {
+            function traversal(root){
+                if(!root)return null
+                if(root===p||root===q)return root
+                let left = traversal(root.left)
+                let right = traversal(root.right)
+                if(left!==null&&right!==null)return root
+                if(left===null&&right!==null)return right
+                if(left!==null&&right===null)return left
+                if(left===null&&right===null)return null
+            }
+            return traversal(root)
+        };
+
+        /* 
+        后序遍历的顺序是从下向上遍历
+            因此在遇到p或q节点时直接返回
+            如果左右子树都没有q或p,则返回null
+            如果左右子树有p或q,则返回p或q
+        */
+    </script>
+</body>
+</html>

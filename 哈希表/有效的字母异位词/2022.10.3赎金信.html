@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣383题
+        var canConstruct = function(ransomNote, magazine) {
+            if(magazine.length<ransomNote.length) return false
+            let S = new Array(26).fill(0)
+            let base = 'a'.charCodeAt()
+            for(let i of magazine){
+                S[i.charCodeAt()-base]++
+            }
+            for(let j of ransomNote){
+                if(!S[j.charCodeAt()-base]) return false
+                S[j.charCodeAt()-base]-- 
+            }
+            return true
+        };
+    </script>
+</body>
+</html>

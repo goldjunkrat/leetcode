@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣203题
+        function ListNode(val, next) {
+            this.val = (val === undefined ? 0 : val)
+            this.next = (next === undefined ? null : next)
+        }
+
+        var removeElements = function(head, val) {
+            //构造一个虚拟节点dummy node
+            let dummyNode = new ListNode(-1)
+            // 使虚拟节点指向头节点
+            dummyNode.next = head
+            // prev记录当前节点的前一个节点
+            let prev = dummyNode
+            // 当虚拟节点指向不为空时,进行循环
+            while(prev.next){
+                if(prev.next.val==val){
+                    prev.next = prev.next.next
+                }else{
+                    prev = prev.next
+                }
+            }
+            return dummyNode.next
+        };
+        
+    </script>
+</body>
+
+</html>

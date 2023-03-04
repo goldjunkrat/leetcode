@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣49题
+        // var groupAnagrams = function(strs) {
+        //     let map = new Map()
+        //     for(str of strs){
+        //         let arr = Array.from(str)
+        //         arr.sort()
+        //         console.log(arr.toString());
+        //         let list = map.get(arr.toString())?map.get(arr.toString()):new Array()
+        //         list.push(str)
+        //         map.set(arr.toString(),list)
+        //     }
+        //     return Array.from(map.values())
+        // };
+
+        // Map的操作,map.set(key,value),map.get(key),map.values()得到map的值
+        // Array的操作,Array.from()将括号中的字符串,集合等变为数组
+
+        var groupAnagrams = function(strs) {
+            let map = new Map()
+            for(str of strs){
+                let arr = Array.from(str)
+                arr.sort()
+                let list = map.get(arr.toString())?map.get(arr.toString()):new Array
+                list.push(str)
+                map.set(arr.toString(),list)
+            }
+            return Array.from(map.values())
+        }
+        console.log(groupAnagrams(["eat","tea","tan","ate","nat","bat"]));
+
+
+
+
+    </script>
+
+    
+</body>
+</html>

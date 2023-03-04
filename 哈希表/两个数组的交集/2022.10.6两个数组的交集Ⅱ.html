@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣350题
+        var intersect = function(nums1, nums2) {
+            // 使用map解决
+            // 存结果
+            let result = []
+            // 使nums1成为元素多的数组
+            if(nums1.length<nums2.length){
+                let _ = nums1
+                nums1 = nums2
+                nums2 = _
+            }
+            let map = new Map()
+            // 将nums1装进map中
+            nums1.forEach((num)=>{
+                let value = map.get(num)||0
+                value+=1
+                map.set(num,value)
+            })
+            // 遍历nums2,如果nums2中的元素是map中的key,那么此元素对应的值-1,如果-1过后依然不小于0,那么就将此元素加入结果数组中
+            nums2.forEach((num)=>{
+                if(map.get(num)){
+                    let value = map.get(num)
+                    console.log(value);
+                    value-=1
+                    map.set(num,value)
+                    if(value>=0){
+                        result.push(num)
+                    }
+                }
+            })
+            return result
+        };
+
+        // console.log(intersect([1,2,2,1],[2,2]));
+        // console.log(intersect([4,9,5],[9,4,9,8,4]));
+        console.log(intersect([1,2],[1,1]));
+    </script>
+</body>
+</html>

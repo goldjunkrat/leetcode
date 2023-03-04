@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣404题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var sumOfLeftLeaves = function(root) {
+            let result = 0
+            if(!root)return result
+            if(!root.left&&!root.right){
+                return result
+            }
+            function calcSum(root){
+                if(!root)return
+                if(!root.left&&!root.right){
+                    result+=root.val
+                }
+                calcSum(root.left)
+                if(root.right&&(root.right.left||root.right.right)){
+                    calcSum(root.right)
+                }
+            }
+            calcSum(root)
+            return result
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣454题
+        var fourSumCount = function(nums1, nums2, nums3, nums4) {
+            let result = 0
+            // 先遍历前两个数组
+            let map = new Map()
+            for(let i =0;i<nums1.length;i++){
+                for(let j =0;j<nums2.length;j++){
+                    let sum = nums1[i]+nums2[j]
+                    let value = map.get(nums1[i]+nums2[j])||0
+                    value+=1
+                    map.set(sum,value)
+                }
+            }
+            // 再遍历后两个数组
+            for(let i =0;i<nums3.length;i++){
+                for(let j=0;j<nums4.length;j++){
+                    let sum = nums3[i]+nums4[j]
+                    if(map.get(0-sum)!==undefined){
+                        result+= map.get(0-sum)
+                    }
+                }
+            }
+            return result
+        };
+        console.log(fourSumCount([1,2],[-2,-1],[-1,2],[0,2]));
+
+        // 此题只要求返回个数
+        // nums[i]+nums[j]+nums[k]+nums[l]=0,则两两相加等于另外两个相加的相反数
+        // 使用map作为哈希表
+    </script>
+</body>
+</html>

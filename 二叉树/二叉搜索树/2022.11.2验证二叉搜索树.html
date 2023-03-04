@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣98题
+        function TreeNode(val, left, right) {
+            this.val = (val == undefined ? 0 : val)
+            this.left = (left == undefined ? null : left)
+            this.right = (right == undefined ? null : right)
+        }
+
+        var isValidBST = function (root) {
+            let result = []
+            function traversal(root){
+                if(!root)return
+                traversal(root.left)
+                result.push(root.val)
+                traversal(root.right)
+                
+            }
+            traversal(root)
+            let flag = true
+            for(let i=0;i<result.length-1;i++){
+                if(result[i]>=result[i+1]){
+                    flag = false
+                    break
+                }
+            }
+            return flag
+            
+
+        };
+
+        /* 
+            二叉搜索树的左右子树可以为空,但是如果有,就必须满足
+                左子树的所有节点小于根节点
+                右子树的所有节点大于根节点
+                且左右子树自身为二叉搜索树
+            对二叉搜索树进行中序遍历,如果遍历出的数组是单调递增的,那么这就是一颗二叉搜索树
+        */
+    </script>
+</body>
+
+</html>

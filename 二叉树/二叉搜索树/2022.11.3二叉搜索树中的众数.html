@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣501题
+        function TreeNode(val, left, right) {
+            this.val = (val == undefined ? 0 : val)
+            this.left = (left == undefined ? null : left)
+            this.right = (right == undefined ? null : right)
+        }
+
+        var findMode = function (root) {
+            let result = []
+            // 用来记录之前的值
+            let preVal = 10 * 10 * 10 * 10 * 10 + 1
+            // 用来记录最大数量
+            let maxNum = 0
+            // 用来记录当前数量
+            let currentNum = 0
+            function traversal(root) {
+                if (!root) return
+                traversal(root.left)
+                if (root.val !== preVal) {
+                    // 如果当前节点的值和之前节点的值不同,使之前节点的值等于当前节点的值,并且个数设置为1
+                    preVal = root.val
+                    currentNum = 1
+                } else {
+                    // 如果相同,个数+1
+                    currentNum += 1
+                }
+                // 如果当前的个数超过了最大个数
+                if (currentNum > maxNum) {
+                    // 更新最大个数
+                    maxNum = currentNum
+                    // 遍历数组,如果有小于最大个数的,就将其清除出数组
+                    while (result.length && (result[0].num < maxNum)) {
+                        result.shift()
+                    }
+                    // 清除之后,将最新的也就是最大的加入数组
+                    result.push({
+                        val: preVal,
+                        num: maxNum
+                    })
+                }
+                // 如果当前个数=最大个数,且当前值和之前的最大个数的值不同,那就将当前值与个数加入数组
+                else if((currentNum==maxNum)&&(preVal!==result[result.length-1].val)){
+                    result.push({
+                        val: preVal,
+                        num: maxNum
+                    })
+                }
+                traversal(root.right)
+            }
+            traversal(root)
+            let final = []
+            result.forEach((item)=>{
+                final.push(item.val)
+            })
+            return final
+        };
+    </script>
+</body>
+
+</html>

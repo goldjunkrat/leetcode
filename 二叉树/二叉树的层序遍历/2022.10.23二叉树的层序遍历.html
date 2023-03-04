@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣102题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+        var levelOrder = function(root) {
+            let result = []
+            let queue = []
+            if(!root) return result
+            queue.push(root)
+            while(queue.length){
+                // 每层的元素总数
+                let size = queue.length
+                // 每层的还在队列中的剩余元素数
+                let rest = size
+                // 每层的元素数组
+                let floor = []
+                while(rest>0){
+                    // 将队首元素出队并加入本层元素数组中
+                    let out = queue.shift()
+                    floor.push(out.val)
+                    rest--
+                    // 如果有左子树则将左子树加入
+                    out.left&&queue.push(out.left)
+                    // 如果有右子树则将右子树加入
+                    out.right&&queue.push(out.right)
+                }
+                // 将本层元素数组加入结果数组中
+                result.push(floor)
+            }
+            return result
+        };
+    </script>
+</body>
+</html>

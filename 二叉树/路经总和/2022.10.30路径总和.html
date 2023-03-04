@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣112题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var hasPathSum = function(root, targetSum) {
+            let flag = false
+            let initPath = []
+            if(!root)return flag
+            function judgeSum(root,path){
+                path.push(root.val)
+                if((!root.left)&&(!root.right)){
+                    let sum = 0
+                    for(let i=0;i<path.length;i++){
+                        sum+=path[i]
+                    }
+                    if(sum==targetSum){
+                        flag = true
+                    }
+                }else{
+                    let leftPath = []
+                    let rightPath = []
+                    for(let i=0;i<path.length;i++){
+                        leftPath[i] = path[i]
+                        rightPath[i] = path[i]
+                    }
+                    root.left&&judgeSum(root.left,leftPath)
+                    root.right&&judgeSum(root.right,rightPath)
+                }
+            }
+            judgeSum(root,initPath)
+            return flag
+        };
+    </script>
+</body>
+</html>

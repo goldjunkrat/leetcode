@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣344题
+        var reverseString = function(s) {
+            // 字符串方法
+            // s.reverse()
+
+            // 首位字母换位
+            let l =0
+            let r =s.length-1
+            while(l<=r){
+                
+                let temp = s[l]
+                s[l] = s[r]
+                s[r] = temp
+                l++
+                r = s.length-1-l
+            }
+            return s
+        };
+        console.log(reverseString(["H","a","n","n","a","h"]));
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣242题
+        var isAnagram = function(s, t) {
+
+            // 对象写法
+            // 用一个对象来装s中的各字符及其出现的次数
+            // let wordS = {}
+            // // 用一个对象来装t中的各字符及其出现的次数
+            // // let wordT = {}
+            // let arrS = s.split('')
+            // let n = arrS.length
+            // // 需要一个数来表示s和t中出现同一种字符的种类数
+            // // let valid = 0
+            // for(let i=0;i<n;i++){
+            //     wordS[arrS[i]]=(wordS[arrS[i]]||0)+1
+            // }
+            // let arrT = t.split('')
+            // // for(let j=0;j<arrT.length;j++){
+            // //     wordT[arrT[j]]=(wordT[arrT[j]]||0)+1
+            // //     if(wordT[arrT[j]]==wordS[arrT[j]]){
+            // //         valid++
+            // //     }
+            // //     if(wordT[arrT[j]]>wordS[arrT[j]]){
+            // //         valid--
+            // //     }
+            // // }
+            // // if(Object.getOwnPropertyNames(wordS).length==Object.getOwnPropertyNames(wordT).length&&valid==Object.getOwnPropertyNames(wordS).length){
+            // //     return true
+            // // }
+            // for(let j=0;j<arrT.length;j++){
+            //     wordS[arrT[j]] = (wordS[arrT[j]]||0) - 1
+            // }
+            // let flag = 0
+            
+            // for(let i=0;i<Object.getOwnPropertyNames(wordS).length;i++){
+            //     if(wordS[Object.getOwnPropertyNames(wordS)[i]]!==0){
+            //         flag = 1
+            //         break
+            //     }
+            // }
+            // if(flag==0){
+            //     return true
+            // }
+            // return false
+
+            // 不需要用第二个对象去装t的字符种类及出现次数,只需要遍历t时,将s中有t的相应元素的值--,
+            // 如果遍历完后s中的值都为0,则true
+
+            // 数组写法
+            if(s.length!==t.length){
+                return false
+            }
+            const resSet = new Array(26).fill(0)
+            const base = "a".charCodeAt()//返回'a'的unicode编码
+            // 遍历s,统计字符串s中的各字母及其个数
+            for(const i of s){
+                resSet[i.charCodeAt()-base]++
+            }
+            for(const i of t){
+                // 如果此时resSet中i的位置的值已经为0,则说明这个值将会必小于0,所以false
+                if(!resSet[i.charCodeAt()-base]) return false
+                resSet[i.charCodeAt()-base]--
+            }
+            return true
+        };
+        console.log(isAnagram('anagram','nagaram'));
+    </script>
+</body>
+</html>

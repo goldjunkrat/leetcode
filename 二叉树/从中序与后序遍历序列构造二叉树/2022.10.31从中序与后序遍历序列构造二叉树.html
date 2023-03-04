@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣106题
+        function TreeNode(val, left, right) {
+            this.val = (val == undefined ? 0 : val)
+            this.left = (left == undefined ? null : left)
+            this.right = (right == undefined ? null : right)
+        }
+
+        var buildTree = function (inorder, postorder) {
+            let result = new TreeNode(-1,null,null)
+            
+            if (inorder[0] == -1 && postorder[0] == -1) return result
+
+            // 后序遍历的最后一个元素即是根结点
+            let rootVal = postorder[postorder.length - 1]
+            let root = new TreeNode(rootVal)
+
+            function build(root, inorder, postorder) {
+                let rootVal = root.val
+                // 中序遍历中找到根结点,根节点前面的是左子树,根节点后面的是右子树
+                let rootIndex = 0
+                let rightInorder = []
+                let leftInorder = []
+                for (let i = 0; i < inorder.length; i++) {
+                    if (inorder[i] == rootVal) {
+                        rootIndex = i
+                    }
+                }
+                for(let i=0;i<rootIndex;i++){
+                    leftInorder[i] = inorder[i]
+                }
+                for(let i=rootIndex+1,j=0;i<inorder.length;i++,j++){
+                    rightInorder[j] = inorder[i]
+                }
+
+                let rightPostorder = []
+                let leftPostorder = []
+                for (let i = 0; i < leftInorder.length; i++) {
+                    leftPostorder[i] = postorder[i]
+                }
+                for(let i =leftInorder.length,j=0;i<postorder.length-1;i++,j++){
+                    rightPostorder[j] = postorder[i]
+                }
+                // console.log(leftPostorder);
+                // console.log(rightPostorder);
+                // 右子树的后序遍历的最后一个元素是右子树的根节点
+                let leftRoot = null
+                let rightRoot = null
+                if(leftPostorder.length!=0){
+                    let leftRootVal = leftPostorder[leftPostorder.length - 1]
+                    leftRoot = new TreeNode(leftRootVal)
+                    root.left = leftRoot
+                }
+                // 左子树的后序遍历的最后一个元素是左子树的根节点
+                if(rightPostorder.length!=0){
+                    let rightRootVal = rightPostorder[rightPostorder.length - 1]
+                    rightRoot = new TreeNode(rightRootVal)
+                    root.right = rightRoot
+                }
+                
+
+                
+                
+                
+                leftPostorder.length>1&&build(leftRoot,leftInorder,leftPostorder)
+                rightPostorder.length>1&&build(rightRoot,rightInorder,rightPostorder)
+            }
+
+            build(root,inorder,postorder)
+            return root
+        };
+        // console.log(buildTree([9,3,15,20,7],[9,15,7,20,3]));
+        // console.log(buildTree([-1],[-1]));
+        console.log(buildTree([2,1],[2,1]));
+        /* 
+        思路:
+            1.后序遍历数组的最后一个值肯定是根节点
+            2.在中序遍历数组中找到根节点位置,根节点左边的为左子树,右边的为右子树
+            3.将后序遍历数组也按照左右子树分开
+            4.递归:将左子树,右子树看作是单独的树进行下一次递归
+            5.递归终止条件:左子树或右子树数组中只剩一个值,即这个结点不再拥有子树
+        
+        */
+    </script>
+</body>
+
+</html>

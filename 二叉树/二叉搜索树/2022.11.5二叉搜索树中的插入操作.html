@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣701题
+        function TreeNode(val, left, right) {
+            this.val = (val == undefined ? 0 : val)
+            this.left = (left == undefined ? null : left)
+            this.right = (right == undefined ? null : right)
+        }
+
+        var insertIntoBST = function (root, val) {
+            
+            function traversal(root) {
+                if (!root) {
+                    let newNode = new TreeNode(val)
+                    return newNode
+                }
+                
+                if (val < root.val) {
+                    let newNode = traversal(root.left)
+                    if(newNode){
+                        root.left = newNode
+                    }
+                }else{
+                    let newNode = traversal(root.right)
+                    if(newNode){
+                        root.right = newNode
+                    }
+                }
+                return null
+            }
+            let result = traversal(root)
+            if(result){
+                return result
+            }else{
+                return root
+            }
+        };
+
+        /* 
+            向二叉搜索树中插入节点:
+                由于二叉搜索树的特性,因此只要插入节点值大于当前遍历值,则插入节点应该向当前节点的右边遍历
+                如果插入节点值小于当前遍历值,插入节点应该向当前节点的左边遍历
+                当遍历的节点为null时,则此时遍历的位置就应该是节点插入的位置
+        */
+    </script>
+</body>
+
+</html>

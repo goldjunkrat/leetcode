@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣232题
+        var MyQueue = function() {
+            
+            // 入栈
+            this.stackIn = []
+            // 出栈
+            this.stackOut = []
+        };
+        MyQueue.prototype.push = function(x) {
+            this.stackIn.push(x)
+        };
+        MyQueue.prototype.peek = function() {
+            if(this.stackOut.length===0){
+                while(this.stackIn.length){
+                    this.stackOut.push(this.stackIn.pop())
+                }
+            }
+            return this.stackOut[this.stackOut.length-1]
+        };
+        MyQueue.prototype.pop = function() {
+            // 将入栈的值从末尾依次取出,放入出栈中,那么出栈的末尾就是队列的头元素
+            // 需要判断stackOut的长度是否为0,只有当0的时候,才可以把stackIn的元素push进stackOut中,不然会造成队列的首元素错误
+            if(this.stackOut.length===0){
+                while(this.stackIn.length){
+                    this.stackOut.push(this.stackIn.pop())
+                }
+            }
+            return this.stackOut.pop()
+        };
+        MyQueue.prototype.empty = function() {
+            // 只有当两个栈长度都为0的时候,才能说明整个队列为空
+            if(this.stackIn.length==0&&this.stackOut.length==0){
+                return true
+            }
+            return false
+        };
+        let obj = new MyQueue()
+        // console.log(MyQueue.prototype);
+        obj.push(1)
+        obj.push(2)
+        // let a = obj.peek()
+
+        console.log(obj);
+        console.log(obj.pop());
+        console.log(obj);
+    </script>
+</body>
+</html>

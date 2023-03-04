@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣94题
+
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.right = (right==undefined?null:right)
+            this.left = (left==undefined?null:left)
+        }
+
+        var inorderTraversal = function(root) {
+            let stack = []
+            let result = []
+            if(!root){
+                return result
+            }
+            let last = root
+            while(stack.length||last){
+                if(last){
+                    stack.push(last)
+                    last = last.left
+                }else{
+                    
+                    last = stack.pop()
+                    result.push(last.val)
+                    last = last.right
+                }
+            }
+            return result
+        };
+
+        /* 
+            整个算法的思想是遍历左节点直到空,将中结点加入结果,再看右节点
+            1.一开始让last指向root结点
+            2.while循环中设置||last使栈为空时,root也能进栈
+            3.如果last不指向空,使last指向的结点入栈,并使last指向last的左子树
+            4.如果last指向空,有两种情况,上一个结点的左子树为空,上一个结点的右子树为空
+                上一个结点的左子树为空,则将上一个结点出栈,将上一个结点的值加入结果数组,再找上一个结点的右节点
+                上一个结点的右子树为空,则将上上一个结点出栈,再找上上一个结点的右节点
+        
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣77题
+        var combine = function(n, k) {
+            let result = []
+            let path = []
+            function backTracking(startIndex){
+                if(path.length==k){
+                    let stage = []
+                    for(let i=0;i<k;i++){
+                        stage[i] = path[i]
+                    }
+                    result.push(stage)
+                    return
+                }
+                for(let i=startIndex;i<(n-(k-path.length)+1);i++){
+                    path.push(i+1)
+                    backTracking(i+1)
+                    path.pop()
+                }
+            }
+            backTracking(0)
+            return result
+        };
+        combine(4,2)
+        console.log(combine(4,2));
+
+        /* 
+            回溯:
+                所谓回溯,就是回退到当前操作前的上一个状态.
+                需要有撤销的操作.
+        
+        */
+    </script>
+    
+</body>
+</html>

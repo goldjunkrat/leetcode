@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣54题
+        var spiralOrder = function(matrix) {
+            // 行数
+            let row = matrix.length
+            // 列数
+            let column = matrix[0].length
+            // 螺旋的圈数由数量少的行或列决定
+            let n = Math.floor(Math.min(row,column)/2)
+            // 起点
+            let startX=0
+            let startY=0
+            let offset=1
+            // 记录数字在数组中的索引
+            let index=0
+            // 实时索引
+            let i=0
+            let j=0
+            // 返回的数组
+            let nums=[]
+            while(n){
+                // 上面
+                for(i=startX,j=startY;j<column-offset;j++){
+                    nums[index] = matrix[i][j]
+                    index++
+                }
+                // 右面
+                for(;i<row-offset;i++){
+                    nums[index] = matrix[i][j]
+                    index++
+                    
+                }
+                // 下面
+                for(;j>startY;j--){
+                    
+                    nums[index] = matrix[i][j]
+                    index++
+                }
+                // 左面
+                for(;i>startX;i--){
+                    nums[index] = matrix[i][j]
+                    index++
+                }
+                startX++
+                startY++
+                offset++
+                n--
+            }
+            // 如果行列中小的是奇数,那么会存在一行/列,需要单独取值,方向是
+            //  列多,则沿着行遍历.
+            //  行多,则沿着列遍历.
+            let min = Math.min(row,column)
+            
+            if(min%2!==0){
+                if(min==row){
+                    
+                    for(i=startX,j=startY;j<=column-offset;j++){
+                        
+                        nums[index] = matrix[i][j]
+                        index++
+                    }
+                }
+                else{
+                    // console.log(11);
+                    for(i=startX,j=startY;i<=row-offset;i++){
+                        nums[index] = matrix[i][j]
+                        index++
+                    }
+                }
+            }
+            return nums
+            
+        };
+        console.log(spiralOrder([[1,2,3],[4,5,6],[7,8,9]])); 
+    </script>
+</body>
+</html>

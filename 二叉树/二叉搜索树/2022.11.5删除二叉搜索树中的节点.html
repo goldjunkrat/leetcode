@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣450题
+        function TreeNode(val, left, right) {
+            this.val = (val == undefined ? 0 : val)
+            this.left = (left == undefined ? null : left)
+            this.right = (right == undefined ? null : right)
+        }
+
+        var deleteNode = function (root, key) {
+            let targetNode = null
+            let pre = null
+            // 找到要删除的目标节点
+            function findTarget(root) {
+                if (!root) return
+                if (root.val == key) {
+                    targetNode = root
+                } else if (root.val > key) {
+                    pre = root
+                    findTarget(root.left)
+                } else {
+                    pre = root
+                    findTarget(root.right)
+                }
+            }
+            // 找到一棵树中最左边的节点
+            function findLeft(root){
+                if(!root)return null
+                if(findLeft(root.left)==null){
+                    return root
+                }else{
+                    return findLeft(root.left)
+                }
+            }
+
+            findTarget(root)
+            if (targetNode !== null) {
+                // 目标点存在于树中的情况
+                if (pre !== null) {
+                    // 目标点不是根节点的情况
+                    if (pre.left == targetNode) {
+                        // 将目标点父节点先与下面的节点相连
+                        if (targetNode.right) {
+                            pre.left = targetNode.right
+                            // 遍历到右子树中最左边的节点,将目标节点的左子树的头节点,与其相连
+                            findLeft(targetNode.right).left = targetNode.left
+                        } else {
+                            pre.left = targetNode.left
+                        }
+                    } else {
+                        if(targetNode.right){
+                            pre.right = targetNode.right
+                            // 遍历到右子树中最左边的节点,将目标节点的左子树的头节点,与其相连
+                            findLeft(targetNode.right).left = targetNode.left
+                        }else{
+                            pre.right = targetNode.left
+                        }
+                    }
+                }else{
+                    // 目标点是根节点的情况
+                    if(targetNode.right){
+                        root = targetNode.right
+                        findLeft(root).left = targetNode.left
+                    }else{
+                        root = targetNode.left
+                    }
+                }
+            }
+            return root
+        };
+    </script>
+</body>
+
+</html>

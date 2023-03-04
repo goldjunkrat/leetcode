@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣617题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var mergeTrees = function(root1, root2) {
+            let newNode = new TreeNode()
+            if(!root1&&root2){
+                newNode.val = root2.val
+
+            }else if(root1&&!root2){
+                newNode.val = root1.val
+            }else if(!root1&&!root2){
+                newNode = null
+            }else if(root1&&root2){
+                newNode.val = root1.val+root2.val
+            }
+            if(newNode){
+                if(!root1){
+                    newNode.left = mergeTrees(null,root2.left)
+                    newNode.right = mergeTrees(null,root2.right)
+                }else if(!root2){
+                    newNode.left = mergeTrees(root1.left,null)
+                    newNode.right = mergeTrees(root1.right,null)
+                }else{
+                    newNode.left = mergeTrees(root1.left,root2.left)
+                    newNode.right = mergeTrees(root1.right,root2.right)
+                }
+                
+                
+            }
+            return newNode
+        };
+    </script>
+</body>
+</html>

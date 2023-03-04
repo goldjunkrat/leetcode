@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣108题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var sortedArrayToBST = function(nums) {
+            if(nums.length==0){
+                return null
+            }
+            // 确定中间节点元素索引
+            let half = Math.floor((nums.length-1)/2)
+            // 确定左子树数组
+            let leftArr = []
+            for(i=0;i<half;i++){
+                leftArr[i] = nums[i]
+            }
+            // 确定右子树数组
+            let rightArr = []
+            for(i=0,j=half+1;j<nums.length;i++,j++){
+                rightArr[i] = nums[j]
+            }
+            // 建立中间节点
+            let root = new TreeNode(nums[half])
+            root.left = sortedArrayToBST(leftArr)
+            root.right = sortedArrayToBST(rightArr)
+            return root
+        };
+
+        /* 
+            将有序数组转换为高度平衡的二叉搜索树
+            1.因为高度平衡,因此每次寻找当前数组的中间的值作为根节点值,这样保证两边元素数量最大相差一,即高度平衡
+            2.每次计算出左右子树的元素数组,并进行递归
+            3.创建中间节点,并对左子树根节点传入左数组,对右子树根节点传入右数组
+        
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 力扣202题
+        var isHappy = function (n) {
+            // 当平方和重复出现的时候,说明这个数不是快乐数
+
+            let sum = n
+            let map = new Map()
+            map.set(sum, 1)
+            while (1) {
+                let arr = Array.from(JSON.stringify(sum))
+                let tempSum = 0
+                for (let i of arr) {
+                    tempSum += Number(i)*Number(i) 
+                }
+                sum = tempSum
+                
+                if(sum==1){
+                    return true
+                }
+                if(map.get(sum) !== undefined){
+                    break
+                }
+                map.set(sum, 1)
+            }
+            return false
+
+
+        };
+        
+        console.log(isHappy(1));
+    </script>
+</body>
+
+</html>

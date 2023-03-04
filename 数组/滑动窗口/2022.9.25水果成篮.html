@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣904题
+        var totalFruit = function(fruits) {
+            let n = fruits.length
+            let left = 0
+            // 记录没被排出的水果在窗口中最后一次出现的位置
+            let one = left
+            // 记录窗口中的水果种类(刚开始只有第一种)
+            let array = [fruits[left]]
+            // 记录窗口最大长度
+            let maxLen = 0
+            for(let right = 0;right<n;right++){
+                // 如果最新遍历到的水果不在水果种类中
+                if(!array.includes(fruits[right])){
+                    // 如果水果种类只有一种
+                    if(array.length<=1){
+                        // 为水果种类中添加新的水果
+                        array[1]=fruits[right]
+                    }else{
+                        // 水果种类两种的情况
+                        
+                        // 1.将左指针指向没被排出水果最后一次出现的位置(更新后相当于第一个水果就被排出滑动窗口了)
+                        left = one
+                        // 2.更新水果种类数组
+                        array[0] = fruits[right-1]
+                        array[1] = fruits[right]
+                    }
+                }
+
+
+                // 如果进来的水果类型和上个没被排出的水果类型不一样,则上个没被排出水果可能就是下一个被排出的水果,新进来的水果就成为了没被排出的水果
+                if(fruits[right]!==fruits[one]){
+                    one = right
+                }
+
+                maxLen = Math.max(maxLen,right-left+1)
+            }
+            return maxLen
+        };
+
+
+        /* 
+            本题的关键在于
+                1.滑动窗口中的两种水果类型不一定是谁先被排出,因为存在1,2,1,2,3或1,2,1,3.第一种就是1被排出,第二种就是2被排出
+                    因此,one的值一直是随着谁没被排出而变化的,left也是直接落在没被排出的那个值上
+        */
+    </script>
+</body>
+</html>

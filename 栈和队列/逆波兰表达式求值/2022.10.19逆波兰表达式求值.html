@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣150题
+        var evalRPN = function(tokens) {
+            // 定义一个栈
+            let stack = []
+            let result = 0
+            for(let i=0;i<tokens.length;i++){
+                // 如果token[i]是数值
+                if(tokens[i]!=='+'&&tokens[i]!=='-'&&tokens[i]!=='*'&&tokens[i]!=='/'){
+                    stack.push(Number(tokens[i]))
+                }else{
+                    // token[i]是运算符的情况
+
+                    // 运算符是+
+                    if(tokens[i]=='+'){
+                        // 将两个值从stack中出栈,并相加
+                        let plusResult = stack.pop()+stack.pop()
+                        // 将相加的结果压入栈中
+                        stack.push(plusResult)
+                    }
+
+                    // 运算符是-
+                    if(tokens[i]=='-'){
+                        // 将两个值从stack中出栈,并相减,顺序为后出栈的-先出栈的
+                        let minusResult = -(stack.pop()-stack.pop())
+                        // 将相减的结果压入栈中
+                        stack.push(minusResult)
+                    }
+
+                    // 运算符是*
+                    if(tokens[i]=='*'){
+                        // 将两个值从stack中出栈,并相乘
+                        let productResult = stack.pop()*stack.pop()
+                        // 将相乘的结果压入栈中
+                        stack.push(productResult)
+                    }
+
+                    // 运算符是/
+                    if(tokens[i]=='/'){
+                        // 将两个值从stack中出栈,并相除,顺序为后出栈的/先出栈的
+                        let first = stack.pop()
+                        let second = stack.pop()
+                        // console.log(first,second);
+                        let divideResult
+                        if(second/first<0){
+                            divideResult = -Math.floor(-(second/first))
+                        }else{
+                            divideResult = Math.floor((second/first))
+                        }
+                        // let divideResult = second/first
+                        // console.log(divideResult);
+                        // 将相除的结果压入栈中
+                        stack.push(divideResult)
+                    }
+                }
+            }
+            // 最终栈里的值即为结果
+            // console.log(stack);
+            return stack[0]
+        };
+
+        console.log(evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"]));
+        console.log(evalRPN(["2","1","+","3","*"]));
+        console.log(evalRPN(["4","13","5","/","+"]));
+        // 每计算一个运算符,将计算结果压入栈中
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 力扣654题
+        function TreeNode(val,left,right){
+            this.val = (val==undefined?0:val)
+            this.left = (left==undefined?null:left)
+            this.right = (right==undefined?null:right)
+        }
+
+        var constructMaximumBinaryTree = function(nums) {
+            // 找最大值
+            let max = -1
+            let index = -1
+            for(let i=0;i<nums.length;i++){
+                if(nums[i]>max){
+                    max = nums[i]
+                    index = i
+                }
+            }
+            let root = new TreeNode(max)
+            // 划分出左右数组
+            let leftArr = []
+            let rightArr = []
+            for(let i =0;i<index;i++){
+                leftArr[i] = nums[i]
+            }
+            for(let i=index+1,j=0;i<nums.length;i++,j++){
+                rightArr[j] = nums[i]
+            }
+            // 当左右数组有元素时,递归
+            if(leftArr.length){
+                root.left = constructMaximumBinaryTree(leftArr)
+            }
+            if(rightArr.length){
+                root.right = constructMaximumBinaryTree(rightArr)
+            }
+            return root
+        };
+    </script>
+</body>
+</html>
